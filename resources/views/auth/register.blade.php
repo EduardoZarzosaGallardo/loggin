@@ -2,6 +2,11 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
+        @if ($errors->has('g-recaptcha-response'))
+            <span class="help-block">
+                <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+            </span>
+        @endif
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -37,6 +42,11 @@
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <div class="form-group mt-3">
+            {!! NoCaptcha::renderJs('es', false, 'recaptchaCallback') !!}
+            {!! NoCaptcha::display() !!}
         </div>
 
         <div class="flex items-center justify-end mt-4">

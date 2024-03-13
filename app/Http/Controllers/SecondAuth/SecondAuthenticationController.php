@@ -20,7 +20,8 @@ class SecondAuthenticationController extends Controller
         try{
             $id_usuario = $this->getIdUsuario($request->email);
         
-            $code = '12345'; //rand(10000,99999);
+            $code = rand(10000,99999);
+            #$code = '12345'; //rand(10000,99999);
 
             $secondAuthenticationCode::updateOrInsert(
                 ['id_usuario' => $id_usuario],
