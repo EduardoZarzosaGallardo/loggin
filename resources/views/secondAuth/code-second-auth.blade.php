@@ -1,33 +1,35 @@
-{{-- resources/views/secondAuth/code-second-auth.blade.php --}}
+<x-guest-layout>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segundo Admin</title>
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-</head>
-<body>
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->has('g-recaptcha-response'))
+        <span class="help-block">
+            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+        </span>
+    @endif
 
     <div class="container">
-        @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
+        <h2>Ingresa el código que se te envió a tu correo electrónico</h2>
+
+        <form method="post" action="{{ route('set_second_auth') }}" class="mt-4">
+        {{ csrf_field() }}
+                    <div class="mb-3">
+                <label for="campo" class="form-label">Código:</label>
+                <input type="text" id="campo" name="campo" class="block mt-1 w-full" required autofocus>
             </div>
-        @endif
 
-        <p>Ingresa el código que se te envió a tu correo electrónico</p>
-
-        <form method="post" action="{{ route('set_second_auth') }}">
-            @csrf
-
-            <label for="campo">Código:</label>
-            <input type="text" id="campo" name="campo" required>
-
-            <button id="btnEnviar" onclick="validationButton()" type="submit" class="btn btn-primary">Enviar</button>
+            <div class="flex items-center justify-end mt-4">
+                <x-primary-button class="ms-3" id="btnEnviar" onclick="validateButton()">
+                    {{ __('Ingresar') }}
+                </x-primary-button>
+             </div>
+       
         </form>
     </div>
 
@@ -38,7 +40,4 @@
             setTimeout(function() {document.getElementById("btnEnviar").disabled = false;}, 2000);
         }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</x-guest-layout>

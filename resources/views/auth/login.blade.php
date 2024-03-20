@@ -15,8 +15,7 @@
     @endif
 
     <form method="POST" action="{{ route('login') }}">
-        @csrf
-
+    {{ csrf_field() }}
 
         <div>
             <x-input-label for="email" :value="__('Correo Electronico')" />

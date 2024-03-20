@@ -23,7 +23,7 @@ Route::get('/ingresa-codigo', function () {
     return view('secondAuth.code-second-auth');
 })->middleware(['auth', 'verified'])->name('ingresa_codigo');;
 */
-Route::get('/confirmacion/secondAuth', [SecondAuthenticationController::class, 'showViewSecondAuthCode'])->middleware(['checkFirstView'])->name('second_auth');
+Route::get('/login/administrador', [SecondAuthenticationController::class, 'showViewSecondAuthCode'])->middleware(['checkFirstView'])->name('second_auth');
 Route::post('/ingresa-codigo', [SecondAuthenticationController::class, 'setSecondAuthCode'])->name('set_second_auth');
 
 Route::get('/dashboard', function () {

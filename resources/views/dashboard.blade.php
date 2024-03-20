@@ -11,6 +11,13 @@
                 <div class="p-6 text-gray-900">
                     {{ __("Bienvenido") }}
                     {{ $rol ?? '' }}
+                    @if (Auth::user()->rol == 1)
+            {{ __("administrador") }}
+        @elseif (Auth::user()->rol == 2)
+            {{ __("usuario normal") }}
+        @else
+            {{ __("usuario sin rol definido") }}
+        @endif
                 </div>
             </div>
         </div>

@@ -37,8 +37,7 @@ class SecondAuthenticationController extends Controller
         } 
         catch(\Exception $e){
 
-            //return redirect()->route('dashboard')->with('error', 'Error al registrar al nuevo usuario, vuelva a intentarlo mas tarde' . $e->getMessage());
-            return redirect()->route('dashboard')->with('error', 'Error al registrar al nuevo usuario, vuelva a intentarlo mas tarde');
+            return redirect()->route('dashboard')->with('error', 'Codigo invalido');
         }        
     }
 
@@ -81,7 +80,7 @@ class SecondAuthenticationController extends Controller
             
         } catch(\Exception $e){
 
-            return redirect()->route('second_auth')->with('error', 'Error al actualizar o insertar el registro: ' . $e->getMessage());
+            return redirect()->route('second_auth')->with('error', 'Codigo invalido: ' . $e->getMessage() . "a");
         
         }
     }
